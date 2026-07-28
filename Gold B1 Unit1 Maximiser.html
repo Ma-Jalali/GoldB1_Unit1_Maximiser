@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gold B1 Preliminary: Exam Maximiser — Unit 1</title>
+<style>
+  :root{
+    --red:#C8102E; --red-dark:#9E0C22; --red-soft:#E24A5F;
+    --pink:#FCEDEB; --pink-border:#F1CDC8;
+    --ink:#1f2124; --muted:#5b6068; --line:#e5e5e8;
+    --bg:#f4f4f5; --card:#ffffff;
+    --ok:#1a7f4b; --ok-bg:#e7f5ec; --ok-border:#b7e0c6;
+    --bad:#c0263b; --bad-bg:#fbebed; --bad-border:#f2c2c9;
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.6; font-size:16px;
+  }
+  .wrap{max-width:840px; margin:0 auto; padding:0 14px 70px;}
+
+  /* Header */
+  header{background:var(--red); color:#fff; padding:22px 14px 24px;}
+  header .inner{max-width:840px; margin:0 auto; display:flex; align-items:center; gap:16px;}
+  .unitbadge{
+    background:#fff; color:var(--red); font-weight:800; font-size:34px;
+    width:60px; height:60px; border-radius:8px;
+    display:flex; align-items:center; justify-content:center; flex:0 0 auto;
+  }
+  header h1{margin:0; font-size:15px; font-weight:600; letter-spacing:.3px; opacity:.95;}
+  header h2{margin:3px 0 0; font-size:25px; font-weight:800; letter-spacing:.4px; line-height:1.2;}
+
+  /* Contents */
+  .toc{background:var(--card); border:1px solid var(--line); border-radius:12px; padding:14px 16px; margin:18px 0;}
+  .toc b{color:var(--red-dark); display:block; margin-bottom:8px; font-size:13px; text-transform:uppercase; letter-spacing:.7px;}
+  .toc a{display:inline-block; margin:5px 12px 5px 0; color:var(--ink); text-decoration:none; font-size:14.5px; border-bottom:2px solid var(--pink-border); padding-bottom:1px;}
+  .toc a:hover,.toc a:focus{border-color:var(--red);}
+
+  /* Section headings */
+  .skill{margin:36px 0 6px; border-top:3px solid var(--red); padding-top:14px;}
+  .skill h3{color:var(--red-dark); font-size:24px; margin:0; font-weight:800;}
+  .skill .sub{color:var(--muted); font-size:15px; margin:2px 0 0;}
+
+  /* Exercise card */
+  .exercise{background:var(--card); border:1px solid var(--line); border-radius:12px; padding:18px 16px; margin:16px 0; box-shadow:0 1px 2px rgba(0,0,0,.03);}
+  .ex-head{display:flex; gap:11px; align-items:flex-start; margin-bottom:14px;}
+  .exnum{background:var(--red); color:#fff; font-weight:800; min-width:27px; height:27px; border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:15px; flex:0 0 auto; margin-top:2px;}
+  .ex-title{font-weight:700; font-size:15.5px; line-height:1.45;}
+  .ex-title .track{display:inline-block; background:var(--red); color:#fff; border-radius:20px; padding:2px 10px; font-size:12.5px; margin-right:7px; white-space:nowrap; vertical-align:1px;}
+
+  /* Question lists */
+  ol.qlist{margin:6px 0 0; padding-left:26px;}
+  ol.qlist>li{margin:16px 0; padding-left:5px;}
+  ol.qlist>li::marker{color:var(--red); font-weight:700;}
+  ol.qlist.tight>li{margin:11px 0;}
+  .q-ans{margin-top:8px;}
+  .q-ans .lead{color:var(--muted); font-size:13.5px; margin-right:6px;}
+
+  /* Lettered lists (A–H options, adverts, paragraphs) */
+  ul.lettered{list-style:none; padding:0; margin:10px 0 0;}
+  ul.lettered>li{position:relative; padding-left:32px; margin:12px 0;}
+  ul.lettered>li>.cl{position:absolute; left:0; top:1px; background:var(--red); color:#fff; width:22px; height:22px; border-radius:5px; text-align:center; font-weight:700; font-size:13px; line-height:22px;}
+
+  /* Reference boxes */
+  .passage{background:var(--pink); border:1px solid var(--pink-border); border-radius:10px; padding:16px 17px; margin:12px 0;}
+  .passage h4{margin:0 0 10px; color:var(--red-dark); font-size:19px;}
+  .passage p{margin:10px 0;}
+  .passage p:first-of-type{margin-top:0;}
+  .passage p:last-child{margin-bottom:0;}
+  .card-note{background:#fff; border:1px solid var(--pink-border); border-radius:10px; padding:14px 16px; margin:12px 0;}
+
+  /* Word bank as chips */
+  .wordbox{margin:10px 0 14px;}
+  .wordbox .wb-label{display:block; font-size:11.5px; text-transform:uppercase; letter-spacing:.7px; color:var(--muted); font-weight:700; margin-bottom:7px;}
+  .chips{display:flex; flex-wrap:wrap; gap:8px;}
+  .chips span{background:#faf7f7; border:1px dashed var(--pink-border); border-radius:20px; padding:5px 13px; font-weight:600; color:var(--red-dark); font-size:14.5px;}
+
+  /* Inputs */
+  input[type=text]{
+    font:inherit; border:none; border-bottom:2px solid var(--pink-border); background:#fdf7f7;
+    padding:6px 8px; min-width:110px; width:180px; max-width:100%; border-radius:5px 5px 0 0; color:var(--ink);
+  }
+  input[type=text].wide{width:340px;}
+  input[type=text].narrow{width:110px; min-width:80px;}
+  input[type=text]:focus{outline:2px solid var(--red-soft); outline-offset:1px; border-color:var(--red);}
+  select{
+    font:inherit; padding:7px 9px; border:1px solid var(--pink-border); border-radius:8px;
+    background:#fff; color:var(--ink); max-width:100%; margin:2px 0;
+  }
+  select:focus{outline:2px solid var(--red-soft); outline-offset:1px; border-color:var(--red);}
+
+  /* Option pills (inline choices such as true/false) */
+  .opts{display:flex; flex-wrap:wrap; gap:8px; margin-top:8px;}
+  .opt{display:inline-flex; align-items:center; gap:6px; cursor:pointer; padding:7px 13px; border:1px solid var(--pink-border); border-radius:20px; background:#fff; font-size:15px;}
+  .opt input{accent-color:var(--red); margin:0; flex:0 0 auto;}
+  /* Stacked multiple choice */
+  .mc{display:block; margin-top:10px;}
+  .mc .opt{display:flex; align-items:flex-start; margin:8px 0; border-radius:9px; padding:10px 13px; line-height:1.45;}
+  .mc .opt input{margin-top:4px;}
+  .mc .lbl{font-weight:700; color:var(--red-dark); margin-right:3px; flex:0 0 auto;}
+  /* Checkbox group */
+  .tips{display:flex; flex-direction:column; gap:8px; margin-top:10px;}
+  .tips label{display:flex; align-items:flex-start; gap:9px; padding:10px 13px; border:1px solid var(--pink-border); border-radius:9px; cursor:pointer; line-height:1.45;}
+  .tips input{accent-color:var(--red); margin-top:4px; flex:0 0 auto;}
+  .tips.inline{flex-direction:row; flex-wrap:wrap;}
+  .tips.inline label{padding:7px 13px; border-radius:20px;}
+
+  /* Dialogue */
+  .dlg{background:var(--pink); border:1px solid var(--pink-border); border-radius:10px; padding:16px;}
+  .dlg .turn{display:grid; grid-template-columns:76px 1fr; gap:10px; margin-bottom:12px;}
+  .dlg .turn:last-child{margin-bottom:0;}
+  .dlg .who{font-weight:800; color:var(--red-dark);}
+  @media (max-width:520px){
+    .dlg .turn{grid-template-columns:1fr; gap:2px;}
+  }
+
+  /* Answer feedback */
+  .correct{border-color:var(--ok)!important; background:var(--ok-bg)!important;}
+  .incorrect{border-color:var(--bad)!important; background:var(--bad-bg)!important;}
+  .opt.opt-correct{background:var(--ok-bg); border-color:var(--ok); color:var(--ok); font-weight:700;}
+  .opt.opt-wrong{background:var(--bad-bg); border-color:var(--bad); color:var(--bad); text-decoration:line-through;}
+  .tips label.opt-correct{background:var(--ok-bg); border-color:var(--ok); color:var(--ok); font-weight:700;}
+  .tips label.opt-wrong{background:var(--bad-bg); border-color:var(--bad); color:var(--bad); text-decoration:line-through;}
+  .ans-hint{display:inline-block; color:var(--ok); font-weight:700; font-size:14px; margin-left:7px; white-space:nowrap;}
+
+  /* Buttons + result */
+  .controls{display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin-top:18px; border-top:1px solid var(--line); padding-top:14px;}
+  button{font:inherit; font-weight:700; border-radius:8px; padding:10px 17px; cursor:pointer; border:2px solid var(--red);}
+  button:focus-visible{outline:2px solid var(--ink); outline-offset:2px;}
+  .btn-check{background:var(--red); color:#fff;}
+  .btn-check:active{background:var(--red-dark);}
+  .btn-reset{background:#fff; color:var(--red);}
+  .btn-model{background:#fff; color:var(--red-dark); border-color:var(--pink-border);}
+  .result{font-weight:700; font-size:15px;}
+  .result.pass{color:var(--ok);} .result.part{color:var(--red-dark);}
+  .model{display:none; margin-top:14px; background:#f5faf6; border:1px solid var(--ok-border); border-radius:10px; padding:14px 16px;}
+  .model.show{display:block;}
+  .model h5{margin:0 0 8px; color:var(--ok); font-size:12.5px; text-transform:uppercase; letter-spacing:.6px;}
+  .model p{margin:8px 0;}
+  .model p:last-child{margin-bottom:0;}
+
+  /* Notes, exam boxes, audio */
+  .note{background:#fff8f8; border:1px solid var(--pink-border); border-radius:10px; padding:13px 15px; font-size:14.5px; color:var(--muted); margin:12px 0;}
+  .note b{color:var(--ink);}
+  .exambox{background:var(--pink); border-radius:10px; padding:15px 17px; margin:14px 0; font-size:14.5px;}
+  .exambox h4{margin:0 0 6px; color:var(--red-dark); font-size:15px;}
+  .exambox h4+p{margin-top:0;}
+  .exambox p{margin:0 0 10px;}
+  .exambox ul{margin:0; padding-left:20px;}
+  .exambox li{margin:5px 0;}
+  .audio{margin:12px 0 14px;}
+  .audio iframe{width:100%; height:66px; border:0; border-radius:8px; background:#fff;}
+  .audio-fallback{font-size:13px; margin:5px 0 0; color:var(--muted);}
+  a{color:var(--red-dark);}
+
+  /* Floating back-to-top button */
+  #toTop{
+    position:fixed; right:16px; bottom:calc(16px + env(safe-area-inset-bottom,0px));
+    z-index:50; display:inline-flex; align-items:center; gap:7px;
+    background:var(--red); color:#fff; border:none; border-radius:26px;
+    padding:12px 18px; font-size:15px; font-weight:700; line-height:1;
+    box-shadow:0 4px 14px rgba(0,0,0,.22); cursor:pointer;
+    opacity:0; visibility:hidden; transform:translateY(12px);
+    transition:opacity .2s ease, transform .2s ease, visibility .2s;
+  }
+  #toTop.show{opacity:1; visibility:visible; transform:translateY(0);}
+  #toTop:active{background:var(--red-dark);}
+  #toTop:focus-visible{outline:3px solid var(--ink); outline-offset:2px;}
+  #toTop .arrow{font-size:17px; line-height:1;}
+  @media (prefers-reduced-motion:reduce){
+    #toTop{transition:none;}
+    html{scroll-behavior:auto;}
+  }
+
+  footer{color:var(--muted); font-size:13px; text-align:center; margin-top:34px;}
+  hr.soft{border:none; border-top:1px solid var(--line); margin:30px 0 0;}
+  @media (max-width:520px){
+    header h2{font-size:21px;}
+    .exercise{padding:16px 13px;}
+    ol.qlist{padding-left:22px;}
+    input[type=text].wide{width:100%;}
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="inner">
+    <div class="unitbadge">1</div>
+    <div>
+      <h1>Gold B1 Preliminary: Exam Maximiser</h1>
+      <h2>Unit 1 — Identity</h2>
+    </div>
+  </div>
+</header>
+<div class="wrap">
+<div class="toc">
+  <b>Contents</b>
+  <a href="#gram1">Grammar · question forms</a>
+  <a href="#read">Reading · gapped text</a>
+  <a href="#voc1">Vocabulary · deducing words</a>
+  <a href="#lis1">Listening · pictures</a>
+  <a href="#voc2">Vocabulary · describing people</a>
+  <a href="#gram2">Grammar · adverbs of frequency</a>
+  <a href="#spk">Speaking · general questions</a>
+  <a href="#wri">Writing · article</a>
+</div>
+
+<div class="note">Answer each exercise, then tap <b>Check answers</b> to see what you got right (green) or wrong (red). Tap <b>Reset</b> to try again.</div>
+
+<!-- ================= GRAMMAR 1 ================= -->
+<div class="skill" id="gram1">
+  <h3>Grammar</h3>
+  <p class="sub">question forms &middot; Coursebook page 7</p>
+</div>
+
+<div class="exercise">
+  <div class="ex-head"><span class="exnum">1</span><span class="ex-title">Put the words in the correct order to form questions.</span></div>
+  <ol class="qlist">
+    <li>your / is / name / what / ?
+      <div class="q-ans"><input type="text" class="wide" data-type="text" data-answer="what is your name|what's your name"></div></li>
+    <li>like / you / name / do / your / ?
+      <div class="q-ans"><input type="text" class="wide" data-type="text" data-answer="do you like your name"></div></li>
+    <li>get / how / you / name / your / did / ?
+      <div class="q-ans"><input type="text" class="wide" data-type="text" data-answer="how did you get your name"></div></li>
+    <li>what / your / interests / are / ?
+      <div class="q-ans"><input type="text" class="wide" data-type="text" data-answer="what are your interests"></div></li>
+    <li>kind / personality / you / what / have / do / of / ?
+      <div class="q-ans"><input type="text" class="wide" data-type="text" data-answer="what kind of personality do you have"></div></li>
+    <li>your / is / job / what / ideal / ?
+      <div class="q-ans"><input type="text" class="wide" data-type="text" data-answer="what is your ideal job|what's your ideal job"></div></li>
+  </ol>
+  <div class="controls">
+    <button class="btn-check" onclick="checkEx(this)">Check answers</button>
+    <button class="btn-reset" onclick="resetEx(this)">Reset</button>
+    <span class="result"></span>
+  </div>
+</div>
+
+<div class="exercise">
+  <div class="ex-head"><span class="exnum">2</span><span class="ex-title">Answer the questions in Exercise 1.</span></div>
+  <p class="note">Speaking and writing practice — there are no fixed answers. Say or write a full answer to each of the six questions, and add one extra detail to each one.</p>
+</div>
+
+<div class="exercise">
+  <div class="ex-head"><span class="exnum">3</span><span class="ex-title">You are going to read an article called <em>What problems can your name cause?</em> What do you think the answer to the question is?</span></div>
+  <p class="note">Think about it before you read. Then read the article in Exercise 4 and see if you were right.</p>
+</div>
+
+<div class="exercise">
+  <div class="ex-head"><span class="exnum">4</span><span class="ex-title">Read the article. Was your answer to Exercise 3 correct?</span></div>
+  <div class="passage">
+    <h4>What problems can your name cause?</h4>
+    <p>Many parents find it difficult to choose a name for their new baby but their decision can be very important.</p>
+    <p>Research shows that the name you give a child can have a long-lasting effect on them because their name can influence the way they think about themselves or even affect their personality. For example, if parents give their baby an unusual name or one with a difficult spelling, it means the child always has to explain their name to others. It can also change the expectations people have of them.</p>
+    <p>It is said that 20 percent of parents regret the name they chose for their child. Others later discovered names they liked better than the one they’d chosen for their baby. Maybe the solution is for us to choose our own names!</p>
+  </div>
+</div>
+
+<div class="exercise">
+  <div class="ex-head"><span class="exnum">5</span><span class="ex-title">Complete the questions. Use one word in each gap. Then match the questions to the answers A–E.</span></div>
+  <ol class="qlist">
+    <li>Why is <input type="text" class="narrow" data-type="text" data-answer="it"> important to choose the right name for a child?
+      <div class="q-ans"><span class="lead">Answer:</span>
+        <select data-type="select" data-answer="B"><option value=""></option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select></div></li>
+    <li><input type="text" class="narrow" data-type="text" data-answer="do"> you think a name can influence a child’s behaviour?
+      <div class="q-ans"><span class="lead">Answer:</span>
+        <select data-type="select" data-answer="A"><option value=""></option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select></div></li>
+    <li><input type="text" class="narrow" data-type="text" data-answer="what"> is the problem for a child who has an unusual name?
+      <div class="q-ans"><span class="lead">Answer:</span>
+        <select data-type="select" data-answer="D"><option value=""></option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select></div></li>
+    <li><input type="text" class="narrow" data-type="text" data-answer="how"> many parents wish they had chosen a different name?
+      <div class="q-ans"><span class="lead">Answer:</span>
+        <select data-type="select" data-answer="E"><option value=""></option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select></div></li>
+    <li><input type="text" class="narrow" data-type="text" data-answer="what"> is the answer to the problem of having a name you don’t like?
+      <div class="q-ans"><span class="lead">Answer:</span>
+        <select data-type="select" data-answer="C"><option value=""></option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select></div></li>
+  </ol>
+  <ul class="lettered">
+    <li><span class="cl">A</span>Yes, because it can change the way a child thinks about themself.</li>
+    <li><span class="cl">B</span>An unusual name can sometimes cause a child problems.</li>
+    <li><span class="cl">C</span>We should choose our own names.</li>
+    <li><span class="cl">D</span>The child has to explain it to other people.</li>
+    <li><span class="cl">E</span>20 percent of parents regret their choice of name for their child.</li>
+  </ul>
+  <div class="controls">
+    <button class="btn-check" onclick="checkEx(this)">Check answers</button>
+    <button class="btn-reset" onclick="resetEx(this)">Reset</button>
+    <span class="result"></span>
+  </div>
+</div>
+
+<div class="exercise">
+  <div class="ex-head"><span class="exnum">6</span><span class="ex-title">Find and correct the mistakes in the conversation. Type the correct words in place of the words in bold.</span></div>
+  <div class="dlg">
+    <div class="turn"><div class="who">Steve:</div><div>Hi, I’m Steve.</div></div>
+    <div class="turn"><div class="who">Bailey:</div><div>I’m Bailey. Nice to meet you.</div></div>
+    <div class="turn"><div class="who">Steve:</div><div>Sorry, I didn’t catch that – <b>what</b> your name?</div></div>
+    <div class="turn"><div class="who">Bailey:</div><div>Bailey. <b>Are</b> you think it’s an unusual name?</div></div>
+    <div class="turn"><div class="who">Steve:</div><div>Yes! Where <b>it does</b> come from?</div></div>
+    <div class="turn"><div class="who">Bailey:</div><div>I think it’s popular in Australia.</div></div>
+    <div class="turn"><div class="who">Steve:</div><div><b>Did</b> you been there?</div></div>
+    <div class="turn"><div class="who">Bailey:</div><div>No, I haven’t – it’s a long way away!</div></div>
+    <div class="turn"><div class="who">Steve:</div><div>So who <b>did gave</b> you that name?</div></div>
+    <div class="turn"><div class="who">Bailey:</div><div>Actually, it was my dad – he just liked it. So <b>am</b> I!</div></div>
+    <div class="turn"><div class="who">Steve:</div><div><b>Are</b> you ever have any problems with the name?</div></div>
+    <div class="turn"><div class="who">Bailey:</div><div>Well, it can be a name for both boys and girls.</div></div>
+    <div class="turn"><div class="who">Steve:</div><div><b>Have</b> people find that confusing?</div></div>
+    <div class="turn"><div class="who">Bailey:</div><div>Definitely! Before they meet me, they often think I’m a boy!</div></div>
+  </div>
+  <ol class="qlist tight">
+    <li>Sorry, I didn’t catch that – <b>what</b> your name?
+      <div class="q-ans"><input type="text" data-type="text" data-answer="what's|what is"></div></li>
+    <li><b>Are</b> you think it’s an unusual name?
+      <div class="q-ans"><input type="text" data-type="text" data-answer="do"></div></li>
+    <li>Where <b>it does</b> come from?
+      <div class="q-ans"><input type="text" data-type="text" data-answer="does it"></div></li>
+    <li><b>Did</b> you been there?
+      <div class="q-ans"><input type="text" data-type="text" data-answer="have"></div></li>
+    <li>So who <b>did gave</b> you that name?
+      <div class="q-ans"><input type="text" data-type="text" data-answer="gave"></div></li>
+    <li>So <b>am</b> I!
+      <div class="q-ans"><input type="text" data-type="text" data-answer="do"></div></li>
+    <li><b>Are</b> you ever have any problems with the name?
+      <div class="q-ans"><input type="text" data-type="text" data-answer="do"></div></li>
+    <li><b>Have</b> people find that confusing?
+      <div class="q-ans"><input type="text" data-type="text" data-answer="do"></div></li>
+  </ol>
+  <div class="controls">
+    <button class="btn-check" onclick="checkEx(this)">Check answers</button>
+    <button class="btn-reset" onclick="resetEx(this)">Reset</button>
+    <span class="result"></span>
+  </div>
+</div>
+
+<div class="exercise">
+  <div class="ex-head"><span class="exnum">7</span><span class="ex-title"><span class="track">Track 01</span>Listen and check your answers to Exercise 6.</span></div>
+  <div class="audio">
+    <iframe src="https://drive.google.com/file/d/1plgqQLOrslfJcZG0ZSW4XXKCp5fudGn3/preview" allow="autoplay" title="Track 01"></iframe>
+    <p class="audio-fallback">If the player does not load, <a href="https://drive.google.com/file/d/1plgqQLOrslfJcZG0ZSW4XXKCp5fudGn3/view" target="_blank" rel="noopener">open Track 01 in a new tab</a>.</p>
+  </div>
+</div>
+
+<div class="exercise">
+  <div class="ex-head"><span class="exnum">8</span><span class="ex-title">There is one word missing in each question. Type the missing word in the correct place.</span></div>
+  <ol class="qlist tight">
+    <li>Where <input type="text" class="narrow" data-type="text" data-answer="did"> you go on holiday last year?</li>
+    <li>What <input type="text" class="narrow" data-type="text" data-answer="is|'s"> your favourite animal?</li>
+    <li>What <input type="text" class="narrow" data-type="text" data-answer="do"> you enjoy doing at the weekends?</li>
+    <li>What <input type="text" class="narrow" data-type="text" data-answer="is|'s"> your best friend like?</li>
+    <li>Did you <input type="text" class="narrow" data-type="text" data-answer="do"> anything special last week?</li>
+    <li>What <input type="text" class="narrow" data-type="text" data-answer="do"> you think you are going to do this evening?</li>
+    <li>How do you get <input type="text" class="narrow" data-type="text" data-answer="to"> school every morning?</li>
+    <li>When <input type="text" class="narrow" data-type="text" data-answer="was"> your last birthday?</li>
+  </ol>
+  <div class="controls">
+    <button class="btn-check" onclick="checkEx(this)">Check answers</button>
+    <button class="btn-reset" onclick="resetEx(this)">Reset</button>
+    <span class="result"></span>
+  </div>
+</div>
+
+<!-- ================= READING ================= -->
+<div class="skill" id="read">
+  <h3>Reading</h3>
+  <p class="sub">Gapped text (Part 4) &middot; Coursebook page 8</p>
+</div>
+
+<div class="exambox">
+  <h4>About the exam</h4>
+  <p>You read a text from which five sentences have been removed. The sentences are given after the text, in a different order and mixed with three extra sentences that do not belong. You decide which sentences belong in the text and where they go.</p>
+  <h4>Strategy</h4>
+  <ul>
+    <li>Read the text quickly without paying attention to the gaps. Think about where you might see it and what it is about.</li>
+    <li>Read the sentences below the text.</li>
+    <li>Read the parts of the text before and after each gap.</li>
+    <li>Find a sentence where tenses, vocabulary, pronouns (e.g. <em>they, them</em>) and reference words (e.g. <em>this, these, it, one</em>) connect with the information before and after the gap.</li>
+    <li>When you have completed the text, read it again to make sure it makes sense.</li>
+  </ul>
+</div>
+
+<div class="exercise">
+  <div class="ex-head"><span class="exnum">1</span><span class="ex-title">Five sentences have been removed from the text below. For each question, choose the correct answer. There are three extra sentences which you do not need to use.</span></div>
+  <div class="passage">
+    <h4>A new me in thirty days?</h4>
+    <p>A few weeks ago, I read an article about our habits and how they <u>influence</u> the way we see ourselves. The idea was that if you change a negative habit or create a positive habit, you can actually begin to feel better about yourself.
+      <select data-type="select" data-answer="D"><option value="">(1)</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option><option>H</option></select>
+      This isn’t as easy as it sounds, which is why the article was called ‘The Thirty-Day Challenge’.</p>
+    <p>There were lots of useful suggestions for creative habits to <u>take up</u>.
+      <select data-type="select" data-answer="H"><option value="">(2)</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option><option>H</option></select>
+      Naturally, there were also some great suggestions of bad habits to <u>give up</u>, like eating sweets or watching TV.</p>
+    <p>I decided to try the thirty-day challenge. I need to <u>get fit</u>, so my first plan was to go for a fifteen-minute run every day. The only problem I had was the weather – it was the middle of winter!
+      <select data-type="select" data-answer="F"><option value="">(3)</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option><option>H</option></select>
+      So I needed to think again.</p>
+    <p>My next idea was to try not to <u>switch on</u> my phone until lunchtime. I knew it would be difficult but I didn’t <u>realise</u> how badly my friends would react.
+      <select data-type="select" data-answer="B"><option value="">(4)</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option><option>H</option></select>
+      So instead, I decided to try learning something. I’m studying Korean and we have a test soon.
+      <select data-type="select" data-answer="G"><option value="">(5)</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option><option>H</option></select>
+      If I can <u>keep up</u> this study habit, I’m sure I’ll do well in class.</p>
+    <p>But can I really <u>carry on</u> with this routine for thirty days? I’m not so sure about that!</p>
+  </div>
+  <ul class="lettered">
+    <li><span class="cl">A</span>Some of the ideas were pretty stupid really.</li>
+    <li><span class="cl">B</span>They all started to complain that I hadn’t answered their messages.</li>
+    <li><span class="cl">C</span>Thirty days doesn’t seem like such a long time.</li>
+    <li><span class="cl">D</span>The writer says that all you have to do is to keep up the good one or avoid the bad one for thirty days.</li>
+    <li><span class="cl">E</span>I kept forgetting to charge it.</li>
+    <li><span class="cl">F</span>I knew that on some days I wouldn’t want to go outside.</li>
+    <li><span class="cl">G</span>I’m trying to memorise five new words every day.</li>
+    <li><span class="cl">H</span>These were things like drawing a picture or learning something new every day.</li>
+  </ul>
+  <div class="controls">
+    <button class="btn-check" onclick="checkEx(this)">Check answers</button>
+    <button class="btn-reset" onclick="resetEx(this)">Reset</button>
+    <span class="result"></span>
+  </div>
+</div>
+
+<!-- ================= VOCABULARY 1 ================= -->
+<div class="skill" id="voc1">
+  <h3>Vocabulary</h3>
+  <p class="sub">deducing words in context &middot; Coursebook page 9</p>
+</div>
+
+<div class="exercise">
+  <div class="ex-head"><span class="exnum">1</span><span class="ex-title">Match the underlined words and phrases in the text above to the definitions.</span></div>
+  <ol class="qlist tight">
+    <li>stop doing something
+      <div class="q-ans"><select data-type="select" data-answer="give up"><option value=""></option><option>carry on</option><option>get fit</option><option>give up</option><option>influence</option><option>keep up</option><option>realise</option><option>switch on</option><option>take up</option></select></div></li>
+    <li>have an effect on
+      <div class="q-ans"><select data-type="select" data-answer="influence"><option value=""></option><option>carry on</option><option>get fit</option><option>give up</option><option>influence</option><option>keep up</option><option>realise</option><option>switch on</option><option>take up</option></select></div></li>
+    <li>continue doing something difficult
+      <div class="q-ans"><select data-type="select" data-answer="keep up"><option value=""></option><option>carry on</option><option>get fit</option><option>give up</option><option>influence</option><option>keep up</option><option>realise</option><option>switch on</option><option>take up</option></select></div></li>
+    <li>start something electrical
+      <div class="q-ans"><select data-type="select" data-answer="switch on"><option value=""></option><option>carry on</option><option>get fit</option><option>give up</option><option>influence</option><option>keep up</option><option>realise</option><option>switch on</option><option>take up</option></select></div></li>
+    <li>become interested in a new activity and start doing it
+      <div class="q-ans"><select data-type="select" data-answer="take up"><option value=""></option><option>carry on</option><option>get fit</option><option>give up</option><option>influence</option><option>keep up</option><option>realise</option><option>switch on</option><option>take up</option></select></div></li>
+    <li>become strong and healthy through exercise
+      <div class="q-ans"><select data-type="select" data-answer="get fit"><option value=""></option><option>carry on</option><option>get fit</option><option>give up</option><option>influence</option><option>keep up</option><option>realise</option><option>switch on</option><option>take up</option></select></div></li>
+    <li>suddenly understand something
+      <div class="q-ans"><select data-type="select" data-answer="realise"><option value=""></option><option>carry on</option><option>get fit</option><option>give up</option><option>influence</option><option>keep up</option><option>realise</option><option>switch on</option><option>take up</option></select></div></li>
+    <li>keep going with something
+      <div class="q-ans"><select data-type="select" data-answer="carry on"><option value=""></option><option>carry on</option><option>get fit</option><option>give up</option><option>influence</option><option>keep up</option><option>realise</option><option>switch on</option><option>take up</option></select></div></li>
+  </ol>
+  <div class="controls">
+    <button class="btn-check" onclick="checkEx(this)">Check answers</button>
+    <button class="btn-reset" onclick="resetEx(this)">Reset</button>
+    <span class="result"></span>
+  </div>
+</div>
+
+<div class="exercise">
+  <div class="ex-head"><span class="exnum">2</span><span class="ex-title">Complete the sentences with the underlined words and phrases from the text.</span></div>
+  <ol class="qlist">
+    <li>I hate doing exercise, but my friend persuaded me to <input type="text" data-type="text" data-answer="take up"> golf and now I love it.</li>
+    <li>I get very enthusiastic about trying new things, but I find it hard to <input type="text" data-type="text" data-answer="keep up"> any kind of regular practice.</li>
+    <li>Most people <input type="text" data-type="text" data-answer="switch on"> their mobile phones the moment they wake up in the morning.</li>
+    <li>My friends often try to <input type="text" data-type="text" data-answer="influence"> my decisions, but I try to ignore them and do what I want.</li>
+    <li>My cousin is trying to <input type="text" data-type="text" data-answer="get fit"> so he jogs two kilometres every morning before work.</li>
+    <li>I didn’t <input type="text" data-type="text" data-answer="realise"> how hard it would be to change my habits!</li>
+    <li>When I started doing yoga I didn’t really like it, but I’ve managed to <input type="text" data-type="text" data-answer="carry on with"> it for almost three years now.</li>
+    <li>I know they’re not good for me but I don’t think I could <input type="text" data-type="text" data-answer="give up"> eating donuts – I love them too much!</li>
+  </ol>
+  <div class="controls">
+    <button class="btn-check" onclick="checkEx(this)">Check answers</button>
+    <button class="btn-reset" onclick="resetEx(this)">Reset</button>
+    <span class="result"></span>
+  </div>
+</div>
+
+<!-- ================= LISTENING ================= -->
+<div class="skill" id="lis1">
+  <h3>Listening</h3>
+  <p class="sub">Multiple choice, pictures (Part 1) &middot; Coursebook page 10</p>
+</div>
+
+<div class="exambox">
+  <h4>About the exam</h4>
+  <p>You hear recordings of seven separate monologues or dialogues. There are three pictures for each recording. You choose the correct picture for each one. You hear each recording twice.</p>
+  <h4>Strategy</h4>
+  <ul>
+    <li>Read the question and check each picture to see how they are different from each other.</li>
+    <li>The first time, listen for key words and think about the correct answer.</li>
+    <li>The second time, listen to confirm your answer.</li>
+  </ul>
+</div>
+
+<div class="exercise">
+  <div class="ex-head"><span class="exnum">1</span><span class="ex-title"><span class="track">Track 02</span>For each question, choose the correct answer.</span></div>
+  <div class="audio">
+    <iframe src="https://drive.google.com/file/d/1jsa05moDLyBjgoj843_at0gTJLtWDFgs/preview" allow="autoplay" title="Track 02"></iframe>
+    <p class="audio-fallback">If the player does not load, <a href="https://drive.google.com/file/d/1jsa05moDLyBjgoj843_at0gTJLtWDFgs/view" target="_blank" rel="noopener">open Track 02 in a new tab</a>.</p>
+  </div>
+  <ol class="qlist">
+    <li>Which picture shows the woman’s brother?
+      <div class="mc" data-type="radio" data-answer="B">
+        <label class="opt"><input type="radio" name="u1L1a" value="A"><span><span class="lbl">A</span> a young man with straight hair</span></label>
+        <label class="opt"><input type="radio" name="u1L1a" value="B"><span><span class="lbl">B</span> a young man with curly hair</span></label>
+        <label class="opt"><input type="radio" name="u1L1a" value="C"><span><span class="lbl">C</span> a young man with curly hair and glasses</span></label>
+      </div></li>
+    <li>How did the man find out about the football result?
+      <div class="mc" data-type="radio" data-answer="C">
+        <label class="opt"><input type="radio" name="u1L1b" value="A"><span><span class="lbl">A</span> on a laptop</span></label>
+        <label class="opt"><input type="radio" name="u1L1b" value="B"><span><span class="lbl">B</span> in a newspaper</span></label>
+        <label class="opt"><input type="radio" name="u1L1b" value="C"><span><span class="lbl">C</span> on television</span></label>
+      </div></li>
+    <li>What will the weather be like at the weekend?
+      <div class="mc" data-type="radio" data-answer="B">
+        <label class="opt"><input type="radio" name="u1L1c" value="A"><span><span class="lbl">A</span> snowy</span></label>
+        <label class="opt"><input type="radio" name="u1L1c" value="B"><span><span class="lbl">B</span> rainy</span></label>
+        <label class="opt"><input type="radio" name="u1L1c" value="C"><span><span class="lbl">C</span> sunny</span></label>
+      </div></li>
+    <li>Where will the man go first?
+      <div class="mc" data-type="radio" data-answer="C">
+        <label class="opt"><input type="radio" name="u1L1d" value="A"><span><span class="lbl">A</span> the bank</span></label>
+        <label class="opt"><input type="radio" name="u1L1d" value="B"><span><span class="lbl">B</span> the post office</span></label>
+        <label class="opt"><input type="radio" name="u1L1d" value="C"><span><span class="lbl">C</span> the petrol station</span></label>
+      </div></li>
+    <li>What did the woman buy for Julia’s birthday?
+      <div class="mc" data-type="radio" data-answer="C">
+        <label class="opt"><input type="radio" name="u1L1e" value="A"><span><span class="lbl">A</span> a book</span></label>
+        <label class="opt"><input type="radio" name="u1L1e" value="B"><span><span class="lbl">B</span> a necklace and earrings</span></label>
+        <label class="opt"><input type="radio" name="u1L1e" value="C"><span><span class="lbl">C</span> gloves</span></label>
+      </div></li>
+    <li>Which television programme does the man want to watch?
+      <div class="mc" data-type="radio" data-answer="B">
+        <label class="opt"><input type="radio" name="u1L1f" value="A"><span><span class="lbl">A</span> motor racing</span></label>
+        <label class="opt"><input type="radio" name="u1L1f" value="B"><span><span class="lbl">B</span> a documentary about a factory</span></label>
+        <label class="opt"><input type="radio" name="u1L1f" value="C"><span><span class="lbl">C</span> a music programme</span></label>
+      </div></li>
+    <li>What will the woman wear to the theatre?
+      <div class="mc" data-type="radio" data-answer="A">
+        <label class="opt"><input type="radio" name="u1L1g" value="A"><span><span class="lbl">A</span> a jacket and a skirt</span></label>
+        <label class="opt"><input type="radio" name="u1L1g" value="B"><span><span class="lbl">B</span> a long skirt and a top</span></label>
+        <label class="opt"><input type="radio" name="u1L1g" value="C"><span><span class="lbl">C</span> a jumper and trousers</span></label>
+      </div></li>
+  </ol>
+  <div class="controls">
+    <button class="btn-check" onclick="checkEx(this)">Check answers</button>
+    <button class="btn-reset" onclick="resetEx(this)">Reset</button>
+    <span class="result"></span>
+  </div>
+</div>
+
+<!-- ================= VOCABULARY 2 ================= -->
+<div class="skill" id="voc2">
+  <h3>Vocabulary</h3>
+  <p class="sub">describing people &middot; Coursebook page 11</p>
+</div>
+
+<div class="exercise">
+  <div class="ex-head"><span class="exnum">1</span><span class="ex-title">Complete the sentences with the correct personality adjective. (These are the crossword answers.)</span></div>
+  <ol class="qlist">
+    <li>I am quite <input type="text" data-type="text" data-answer="shy"> when I meet new people – I can never think of anything to say and my face goes red.</li>
+    <li>My friend always tells the truth. She’s very <input type="text" data-type="text" data-answer="honest">.</li>
+    <li>Sue is a very <input type="text" data-type="text" data-answer="reliable"> person who always does what she says she will do.</li>
+    <li>I’m an extrovert and I’m always very <input type="text" data-type="text" data-answer="cheerful"> and happy.</li>
+    <li>I’m very interested in finding out about anything new – my mother says I’ve always been a <input type="text" data-type="text" data-answer="curious"> person.</li>
+    <li>My friend is often late – he’s not very <input type="text" data-type="text" data-answer="punctual"> and never knows what the time is.</li>
+    <li>I really want to do well in my career – I’m very <input type="text" data-type="text" data-answer="ambitious">.</li>
+    <li>My sister is very <input type="text" data-type="text" data-answer="generous"> and she loves spending her money buying presents for other people.</li>
+    <li>My sister is quite <input type="text" data-type="text" data-answer="sensitive">. Even quite unimportant things can upset her.</li>
+    <li>Sam is a very <input type="text" data-type="text" data-answer="nervous"> person who finds it very difficult to relax, especially before exams.</li>
+    <li>I make lists of the things I need to do every day. I suppose you could say that I’m quite <input type="text" data-type="text" data-answer="organised|organized">.</li>
+  </ol>
+  <div class="controls">
+    <button class="btn-check" onclick="checkEx(this)">Check answers</button>
+    <button class="btn-reset" onclick="resetEx(this)">Reset</button>
+    <span class="result"></span>
+  </div>
+</div>
+
+<div class="exercise">
+  <div class="ex-head"><span class="exnum">2</span><span class="ex-title"><span class="track">Track 03</span>You will hear three people talking about their friends. Listen and match descriptions 1–3 to pictures A–C.</span></div>
+  <div class="audio">
+    <iframe src="https://drive.google.com/file/d/1_IakLicZ9gAEcuxTOJzNzlLow5iMIAPC/preview" allow="autoplay" title="Track 03"></iframe>
+    <p class="audio-fallback">If the player does not load, <a href="https://drive.google.com/file/d/1_IakLicZ9gAEcuxTOJzNzlLow5iMIAPC/view" target="_blank" rel="noopener">open Track 03 in a new tab</a>.</p>
+  </div>
+  <ul class="lettered">
+    <li><span class="cl">A</span>a young man with a beard, in a smart suit</li>
+    <li><span class="cl">B</span>a woman with long curly hair</li>
+    <li><span class="cl">C</span>a man with very short hair, arms folded</li>
+  </ul>
+  <ol class="qlist tight">
+    <li>Description 1
+      <div class="q-ans"><select data-type="select" data-answer="B"><option value=""></option><option>A</option><option>B</option><option>C</option></select></div></li>
+    <li>Description 2
+      <div class="q-ans"><select data-type="select" data-answer="C"><option value=""></option><option>A</option><option>B</option><option>C</option></select></div></li>
+    <li>Description 3
+      <div class="q-ans"><select data-type="select" data-answer="A"><option value=""></option><option>A</option><option>B</option><option>C</option></select></div></li>
+  </ol>
+  <div class="controls">
+    <button class="btn-check" onclick="checkEx(this)">Check answers</button>
+    <button class="btn-reset" onclick="resetEx(this)">Reset</button>
+    <span class="result"></span>
+  </div>
+</div>
+
+<div class="exercise">
+  <div class="ex-head"><span class="exnum">3</span><span class="ex-title">Complete the descriptions from Exercise 2 with words to describe people’s appearance. Use one word in each gap. Then listen to Track 03 again and check.</span></div>
+  <ol class="qlist">
+    <li>My friend Janet is <input type="text" data-type="text" data-answer="middle-aged|middle aged">. She’s got very pretty <input type="text" data-type="text" data-answer="curly"> hair. She’s a bit <input type="text" data-type="text" data-answer="overweight"> so she’s always careful about what she eats.</li>
+    <li>Nick is very <input type="text" data-type="text" data-answer="good-looking|good looking">, in my opinion. He’s almost completely <input type="text" data-type="text" data-answer="bald"> but that lack of hair makes him even more handsome. He’s quite <input type="text" data-type="text" data-answer="thin">, I suppose, but he does a lot of training so that’s why.</li>
+    <li>Tim is quite <input type="text" data-type="text" data-answer="young">. He’s in his early twenties but he’s always very <input type="text" data-type="text" data-answer="smartly-dressed|smartly dressed"> because he works in an office. Over the last couple of months he’s grown a <input type="text" data-type="text" data-answer="beard">. I think it really suits him.</li>
+  </ol>
+  <div class="controls">
+    <button class="btn-check" onclick="checkEx(this)">Check answers</button>
+    <button class="btn-reset" onclick="resetEx(this)">Reset</button>
+    <span class="result"></span>
+  </div>
+</div>
+
+<!-- ================= GRAMMAR 2 ================= -->
+<div class="skill" id="gram2">
+  <h3>Grammar</h3>
+  <p class="sub">present simple with adverbs of frequency &middot; Coursebook page 12</p>
+</div>
+
+<div class="exercise">
+  <div class="ex-head"><span class="exnum">1</span><span class="ex-title">Choose the sentence where the adverb in brackets is in the correct place.</span></div>
+  <ol class="qlist">
+    <li>(normally)
+      <div class="mc" data-type="radio" data-answer="A">
+        <label class="opt"><input type="radio" name="u1g2a" value="A"><span><span class="lbl">A</span> I normally watch a film on television in the evening.</span></label>
+        <label class="opt"><input type="radio" name="u1g2a" value="B"><span><span class="lbl">B</span> I watch normally a film on television in the evening.</span></label>
+      </div></li>
+    <li>(always)
+      <div class="mc" data-type="radio" data-answer="A">
+        <label class="opt"><input type="radio" name="u1g2b" value="A"><span><span class="lbl">A</span> I’m always happy to go to the cinema with friends.</span></label>
+        <label class="opt"><input type="radio" name="u1g2b" value="B"><span><span class="lbl">B</span> I always am happy to go to the cinema with friends.</span></label>
+      </div></li>
+    <li>(often)
+      <div class="mc" data-type="radio" data-answer="A">
+        <label class="opt"><input type="radio" name="u1g2c" value="A"><span><span class="lbl">A</span> I don’t often watch films on my tablet because the screen is too small.</span></label>
+        <label class="opt"><input type="radio" name="u1g2c" value="B"><span><span class="lbl">B</span> I don’t watch often films on my tablet because the screen is too small.</span></label>
+      </div></li>
+    <li>(frequently)
+      <div class="mc" data-type="radio" data-answer="A">
+        <label class="opt"><input type="radio" name="u1g2d" value="A"><span><span class="lbl">A</span> I’m frequently surprised when people say they don’t enjoy sport.</span></label>
+        <label class="opt"><input type="radio" name="u1g2d" value="B"><span><span class="lbl">B</span> I’m surprised frequently when people say they don’t enjoy sport.</span></label>
+      </div></li>
+    <li>(usually)
+      <div class="mc" data-type="radio" data-answer="A">
+        <label class="opt"><input type="radio" name="u1g2e" value="A"><span><span class="lbl">A</span> I don’t usually go out to restaurants with friends during the week.</span></label>
+        <label class="opt"><input type="radio" name="u1g2e" value="B"><span><span class="lbl">B</span> I don’t go usually out to restaurants with friends during the week.</span></label>
+      </div></li>
+    <li>(once a day)
+      <div class="mc" data-type="radio" data-answer="A">
+        <label class="opt"><input type="radio" name="u1g2f" value="A"><span><span class="lbl">A</span> I go for a run once a day.</span></label>
+        <label class="opt"><input type="radio" name="u1g2f" value="B"><span><span class="lbl">B</span> I once a day go for a run.</span></label>
+      </div></li>
+  </ol>
+  <div class="controls">
+    <button class="btn-check" onclick="checkEx(this)">Check answers</button>
+    <button class="btn-reset" onclick="resetEx(this)">Reset</button>
+    <span class="result"></span>
+  </div>
+</div>
+
+<div class="exercise">
+  <div class="ex-head"><span class="exnum">2</span><span class="ex-title">Three of these sentences have a mistake with the position of the adverb. Mark each sentence correct or incorrect.</span></div>
+  <ol class="qlist">
+    <li>How often do you see your close friends?
+      <div class="opts" data-type="radio" data-answer="correct">
+        <label class="opt"><input type="radio" name="u1g2x1" value="correct">Correct</label>
+        <label class="opt"><input type="radio" name="u1g2x1" value="wrong">Mistake</label>
+      </div></li>
+    <li>How do you meet normally new people?
+      <div class="opts" data-type="radio" data-answer="wrong">
+        <label class="opt"><input type="radio" name="u1g2x2" value="correct">Correct</label>
+        <label class="opt"><input type="radio" name="u1g2x2" value="wrong">Mistake</label>
+      </div></li>
+    <li>Do you use any social networking sites regularly?
+      <div class="opts" data-type="radio" data-answer="correct">
+        <label class="opt"><input type="radio" name="u1g2x3" value="correct">Correct</label>
+        <label class="opt"><input type="radio" name="u1g2x3" value="wrong">Mistake</label>
+      </div></li>
+    <li>It’s nice to always make new friends.
+      <div class="opts" data-type="radio" data-answer="wrong">
+        <label class="opt"><input type="radio" name="u1g2x4" value="correct">Correct</label>
+        <label class="opt"><input type="radio" name="u1g2x4" value="wrong">Mistake</label>
+      </div></li>
+    <li>I chat all the time to my friends.
+      <div class="opts" data-type="radio" data-answer="wrong">
+        <label class="opt"><input type="radio" name="u1g2x5" value="correct">Correct</label>
+        <label class="opt"><input type="radio" name="u1g2x5" value="wrong">Mistake</label>
+      </div></li>
+    <li>I meet up with my cousins a few times a year.
+      <div class="opts" data-type="radio" data-answer="correct">
+        <label class="opt"><input type="radio" name="u1g2x6" value="correct">Correct</label>
+        <label class="opt"><input type="radio" name="u1g2x6" value="wrong">Mistake</label>
+      </div></li>
+  </ol>
+  <div class="model">
+    <h5>Corrected sentences</h5>
+    <p>2 How do you <b>normally</b> meet new people?</p>
+    <p>4 It’s <b>always</b> nice to make new friends.</p>
+    <p>5 I chat to my friends <b>all the time</b>.</p>
+    <p>Sentences 1, 3 and 6 are already correct.</p>
+  </div>
+  <div class="controls">
+    <button class="btn-check" onclick="checkEx(this)">Check answers</button>
+    <button class="btn-reset" onclick="resetEx(this)">Reset</button>
+    <button class="btn-model" onclick="toggleModel(this)">Show corrections</button>
+    <span class="result"></span>
+  </div>
+</div>
+
+<!-- ================= SPEAKING ================= -->
+<div class="skill" id="spk">
+  <h3>Speaking</h3>
+  <p class="sub">General questions (Part 1) &middot; Coursebook page 13</p>
+</div>
+
+<div class="exambox">
+  <h4>About the exam</h4>
+  <p>You answer questions about yourself. First the examiner asks you and your partner four standard questions about your name, where you come from and what you do (Phase 1). After this the examiner asks you different questions on topics like your family, your interests and your future plans (Phase 2).</p>
+  <h4>Strategy</h4>
+  <ul>
+    <li>In the first phase, give short answers.</li>
+    <li>In the second phase, give longer answers. Try to say interesting things about yourself, but don’t prepare speeches.</li>
+  </ul>
+</div>
+
+<div class="exercise">
+  <div class="ex-head"><span class="exnum">1</span><span class="ex-title">Complete the examiner’s questions with the words in brackets in the correct order.</span></div>
+  <p><b>Phase 1</b></p>
+  <ol class="qlist">
+    <li>(your / is / name)<br>What <input type="text" class="wide" data-type="text" data-answer="is your name">?</li>
+    <li>(you / do / live)<br>Where <input type="text" class="wide" data-type="text" data-answer="do you live">?</li>
+    <li>(work / you / a / student / or / are / you)<br>Do <input type="text" class="wide" data-type="text" data-answer="you work or are you a student">?</li>
+    <li>(do / do / you)<br>What <input type="text" class="wide" data-type="text" data-answer="do you do">?</li>
+  </ol>
+  <p><b>Phase 2</b></p>
+  <ol class="qlist" start="5">
+    <li>(you / do / travel / work / to / or / college / every day)<br>How <input type="text" class="wide" data-type="text" data-answer="do you travel to work or college every day">?</li>
+    <li>(like / town / you / live / the / in / you)<br>Do <input type="text" class="wide" data-type="text" data-answer="you like the town you live in">?</li>
+    <li>(live / you / do / with)<br>Who <input type="text" class="wide" data-type="text" data-answer="do you live with">?</li>
+    <li>(your / about / family)<br>Tell us <input type="text" class="wide" data-type="text" data-answer="about your family">.</li>
+    <li>(like / do / weekends / you / doing / at)<br>What <input type="text" class="wide" data-type="text" data-answer="do you like doing at weekends">?</li>
+    <li>(your / is / time / favourite / day / of)<br>What <input type="text" class="wide" data-type="text" data-answer="is your favourite time of day">?</li>
+  </ol>
+  <div class="controls">
+    <button class="btn-check" onclick="checkEx(this)">Check answers</button>
+    <button class="btn-reset" onclick="resetEx(this)">Reset</button>
+    <span class="result"></span>
+  </div>
+</div>
+
+<div class="exercise">
+  <div class="ex-head"><span class="exnum">2</span><span class="ex-title">Match answers A–D to four of the Phase 2 questions (5–10) from Exercise 1.</span></div>
+  <ol class="qlist">
+    <li><b>A</b> My mother, father and two brothers, who are older than me. My grandmother lives very near us, too, and we see her every day.
+      <div class="q-ans"><span class="lead">Question:</span>
+        <select data-type="select" data-answer="7"><option value=""></option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option></select></div></li>
+    <li><b>B</b> It’s a great place – there are lots of things to do in the evenings, and places to meet friends. I love living there.
+      <div class="q-ans"><span class="lead">Question:</span>
+        <select data-type="select" data-answer="6"><option value=""></option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option></select></div></li>
+    <li><b>C</b> I usually go by bus, or I cycle. I like meeting my friends on the bus, but it’s also nice to cycle.
+      <div class="q-ans"><span class="lead">Question:</span>
+        <select data-type="select" data-answer="5"><option value=""></option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option></select></div></li>
+    <li><b>D</b> I love the morning when it’s sunny and the birds are singing. I often get up early and it’s so quiet and peaceful then.
+      <div class="q-ans"><span class="lead">Question:</span>
+        <select data-type="select" data-answer="10"><option value=""></option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option></select></div></li>
+  </ol>
+  <div class="controls">
+    <button class="btn-check" onclick="checkEx(this)">Check answers</button>
+    <button class="btn-reset" onclick="resetEx(this)">Reset</button>
+    <span class="result"></span>
+  </div>
+</div>
+
+<div class="exercise">
+  <div class="ex-head"><span class="exnum">3</span><span class="ex-title"><span class="track">Track 04</span>Listen and check your answers to Exercise 2.</span></div>
+  <div class="audio">
+    <iframe src="https://drive.google.com/file/d/1fi32ZUuDgrgDi7_kI7FFEsQWvUjTQ9xS/preview" allow="autoplay" title="Track 04"></iframe>
+    <p class="audio-fallback">If the player does not load, <a href="https://drive.google.com/file/d/1fi32ZUuDgrgDi7_kI7FFEsQWvUjTQ9xS/view" target="_blank" rel="noopener">open Track 04 in a new tab</a>.</p>
+  </div>
+</div>
+
+<div class="exercise">
+  <div class="ex-head"><span class="exnum">4</span><span class="ex-title">Write your own answers to the questions in Exercise 1.</span></div>
+  <p class="note">Try to give some interesting details about yourself. In Phase 1 keep your answers short. In Phase 2 add a reason or an example to each answer.</p>
+</div>
+
+<div class="exercise">
+  <div class="ex-head"><span class="exnum">5</span><span class="ex-title">Some words sound almost the same as other words but are spelt differently. Choose the correct alternative in each question.</span></div>
+  <ol class="qlist tight">
+    <li><select data-type="select" data-answer="Where"><option value=""></option><option>Where</option><option>Wear</option></select> do you come from?</li>
+    <li>Have you lived <select data-type="select" data-answer="there"><option value=""></option><option>there</option><option>their</option></select> for a long time?</li>
+    <li>Do you know <select data-type="select" data-answer="whether"><option value=""></option><option>weather</option><option>whether</option></select> Steve wants to come to the cinema?</li>
+    <li>Is Susan <select data-type="select" data-answer="here"><option value=""></option><option>hear</option><option>here</option></select> yet?</li>
+  </ol>
+  <div class="controls">
+    <button class="btn-check" onclick="checkEx(this)">Check answers</button>
+    <button class="btn-reset" onclick="resetEx(this)">Reset</button>
+    <span class="result"></span>
+  </div>
+</div>
+
+<!-- ================= WRITING ================= -->
+<div class="skill" id="wri">
+  <h3>Writing</h3>
+  <p class="sub">Article (Part 2) &middot; Coursebook page 14</p>
+</div>
+
+<div class="exambox">
+  <h4>About the exam</h4>
+  <p>In Part 2 of the Writing paper you choose one task from two options, an article or a story. For the article, you are given questions to answer, and you should try to be interesting in your writing. You don’t have to write exactly 100 words but you should write at least 80 and not more than 110.</p>
+  <h4>Strategy</h4>
+  <ul>
+    <li>Read the question carefully, and decide what you must write about.</li>
+    <li>Plan your article. Think about what information to include and what language to use.</li>
+    <li>Make your article interesting for the reader, for example by using questions and a variety of adjectives.</li>
+    <li>Think of an interesting introduction and a conclusion.</li>
+    <li>Write about 100 words. Organise it into paragraphs.</li>
+    <li>Check your spelling, punctuation and grammar.</li>
+  </ul>
+</div>
+
+<div class="exercise">
+  <div class="ex-head"><span class="exnum">1</span><span class="ex-title">Look at the exam task and the article a student has written. Put the paragraphs in the correct order.</span></div>
+  <div class="card-note">
+    <p>You see this notice on an English-language website.</p>
+    <p style="text-align:center;color:var(--red-dark);font-weight:700;margin:12px 0 6px">Articles wanted!</p>
+    <p style="text-align:center;margin:0">We want to know about a musician you are really keen on. What are they like? What kind of music do they play? Why do you like them so much?<br>Write an article answering these questions and we will put it on our website.</p>
+    <p style="margin-bottom:0">Write your <b>article</b> in about <b>100 words</b>.</p>
+  </div>
+  <ol class="qlist">
+    <li><b>A</b> Firstly, he’s good-looking, and is kind and generous. He always talks to fans after a concert, and usually signs autographs. He is sociable and makes you feel as though you really know him well.
+      <div class="q-ans"><span class="lead">Paragraph number:</span>
+        <select data-type="select" data-answer="2"><option value=""></option><option>1</option><option>2</option><option>3</option><option>4</option></select></div></li>
+    <li><b>B</b> My favourite musician is Mick Evans, a guitarist. He’s not well-known, and at the moment he only plays locally. So why do I like him so much?
+      <div class="q-ans"><span class="lead">Paragraph number:</span>
+        <select data-type="select" data-answer="1"><option value=""></option><option>1</option><option>2</option><option>3</option><option>4</option></select></div></li>
+    <li><b>C</b> I suppose I like him because I think he might become very famous. Then I’ll have been the first to discover him!
+      <div class="q-ans"><span class="lead">Paragraph number:</span>
+        <select data-type="select" data-answer="4"><option value=""></option><option>1</option><option>2</option><option>3</option><option>4</option></select></div></li>
+    <li><b>D</b> He normally plays rock music, but he can also sing ballads. He is sensitive and has a great voice, and he generally writes his own songs.
+      <div class="q-ans"><span class="lead">Paragraph number:</span>
+        <select data-type="select" data-answer="3"><option value=""></option><option>1</option><option>2</option><option>3</option><option>4</option></select></div></li>
+  </ol>
+  <div class="model">
+    <h5>Answer</h5>
+    <p>The correct order is <b>B, A, D, C</b>.</p>
+  </div>
+  <div class="controls">
+    <button class="btn-check" onclick="checkEx(this)">Check answers</button>
+    <button class="btn-reset" onclick="resetEx(this)">Reset</button>
+    <button class="btn-model" onclick="toggleModel(this)">Show answer</button>
+    <span class="result"></span>
+  </div>
+</div>
+
+<div class="exercise">
+  <div class="ex-head"><span class="exnum">2</span><span class="ex-title">Now write your own answer to the exam task in Exercise 1.</span></div>
+  <p class="note">Before you start: choose your musician, note two things about what they are like, one thing about their music, and one reason why you like them. Write about 100 words in three or four paragraphs.</p>
+</div>
+<hr class="soft">
+<footer>Gold B1 Preliminary: Exam Maximiser — Unit 1. Interactive practice.<br>Audio &copy; Pearson. For classroom use.</footer>
+</div>
+<button id="toTop" type="button" aria-label="Back to top and contents"><span class="arrow" aria-hidden="true">&#8593;</span> Top</button>
+
+<script>
+(function(){
+  var btn=document.getElementById('toTop');
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var ticking=false;
+  function update(){
+    if(window.pageYOffset>420) btn.classList.add('show');
+    else btn.classList.remove('show');
+    ticking=false;
+  }
+  window.addEventListener('scroll',function(){
+    if(!ticking){ ticking=true; window.requestAnimationFrame(update); }
+  },{passive:true});
+  btn.addEventListener('click',function(){
+    window.scrollTo({top:0, behavior: reduce?'auto':'smooth'});
+    var first=document.querySelector('.toc a');
+    if(first) setTimeout(function(){ first.focus({preventScroll:true}); }, reduce?0:420);
+  });
+  update();
+})();
+
+function norm(s){
+  return (s||'').toString().trim().toLowerCase()
+    .replace(/[\u2019\u2018]/g,"'").replace(/[\u201C\u201D]/g,'"')
+    .replace(/[\u2013\u2014]/g,'-')
+    .replace(/\s+/g,' ').replace(/[.!?]+$/,'');
+}
+function setState(el,ok){ el.classList.remove('correct','incorrect'); el.classList.add(ok?'correct':'incorrect'); }
+function showHint(field, ok, answerStr){
+  var n=field.nextElementSibling;
+  if(n && n.classList && n.classList.contains('ans-hint')) n.parentNode.removeChild(n);
+  if(!ok){
+    var first=(answerStr||'').split('|')[0];
+    var h=document.createElement('span');
+    h.className='ans-hint'; h.textContent='\u2713 '+first;
+    field.insertAdjacentElement('afterend', h);
+  }
+}
+function checkEx(btn){
+  var ex=btn.closest('.exercise');
+  var total=0, got=0;
+  ex.querySelectorAll('[data-type]').forEach(function(q){
+    var type=q.dataset.type||'text';
+    var ok=false;
+
+    if(type==='text'){
+      var el=q.tagName==='INPUT'?q:q.querySelector('input');
+      var acc=(q.dataset.answer||'').split('|').map(norm);
+      ok=acc.indexOf(norm(el.value))>-1; setState(el,ok);
+      showHint(el, ok, q.dataset.answer); total++;
+
+    }else if(type==='select'){
+      var s=q.tagName==='SELECT'?q:q.querySelector('select');
+      var accs=(q.dataset.answer||'').split('|').map(norm);
+      ok=accs.indexOf(norm(s.value))>-1; setState(s,ok);
+      showHint(s, ok, q.dataset.answer); total++;
+
+    }else if(type==='radio'){
+      var accr=(q.dataset.answer||'').split('|').map(norm);
+      var chk=q.querySelector('input[type=radio]:checked');
+      ok= !!chk && accr.indexOf(norm(chk.value))>-1;
+      q.querySelectorAll('.opt').forEach(function(opt){
+        opt.classList.remove('opt-correct','opt-wrong');
+        var inp=opt.querySelector('input');
+        if(accr.indexOf(norm(inp.value))>-1) opt.classList.add('opt-correct');
+        else if(inp.checked) opt.classList.add('opt-wrong');
+      });
+      total++;
+
+    }else if(type==='checkbox'){
+      var wantArr=(q.dataset.answer||'').split(',').map(function(x){return x.trim();});
+      var haveArr=[].slice.call(q.querySelectorAll('input:checked')).map(function(i){return i.value;});
+      ok=(wantArr.slice().sort().join(',')===haveArr.slice().sort().join(','));
+      q.querySelectorAll('label').forEach(function(lab){
+        lab.classList.remove('opt-correct','opt-wrong');
+        var inp=lab.querySelector('input');
+        if(wantArr.indexOf(inp.value)>-1) lab.classList.add('opt-correct');
+        else if(inp.checked) lab.classList.add('opt-wrong');
+      });
+      total++;
+    }
+    if(ok)got++;
+  });
+
+  var res=ex.querySelector('.result');
+  if(res){
+    res.textContent='You got '+got+' out of '+total+' correct.';
+    res.classList.remove('pass','part');
+    res.classList.add(got===total?'pass':'part');
+  }
+}
+
+function resetEx(btn){
+  var ex=btn.closest('.exercise');
+  ex.querySelectorAll('input[type=text]').forEach(function(i){i.value='';i.classList.remove('correct','incorrect');});
+  ex.querySelectorAll('select').forEach(function(s){s.value='';s.classList.remove('correct','incorrect');});
+  ex.querySelectorAll('input[type=radio],input[type=checkbox]').forEach(function(i){i.checked=false;});
+  ex.querySelectorAll('label').forEach(function(l){l.classList.remove('opt-correct','opt-wrong');});
+  ex.querySelectorAll('.ans-hint').forEach(function(x){x.parentNode.removeChild(x);});
+  var res=ex.querySelector('.result'); if(res){res.textContent='';res.classList.remove('pass','part');}
+}
+
+function toggleModel(btn){
+  var m=btn.closest('.exercise').querySelector('.model');
+  var shown=m.classList.toggle('show');
+  btn.textContent=shown?'Hide answers':(btn.dataset.label||'Show answers');
+}
+document.querySelectorAll('.btn-model').forEach(function(b){b.dataset.label=b.textContent;});
+</script>
+</body>
+</html>
